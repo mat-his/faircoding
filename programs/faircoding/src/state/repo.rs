@@ -26,14 +26,14 @@ impl Repo {
         }
 
         self.dependencies[idx].key = value;
-        self.dependencies[idx].rewarded = 0;
+        self.dependencies[idx].rewarded = 0u8;
         self.len += 1;
         Ok(())
     }
     pub fn validate(&mut self, key: [u8; 32]) -> Result<()> {
         for i in 0..self.len as usize {
             if self.dependencies[i].key == key {
-                self.dependencies[i].rewarded = 1;
+                self.dependencies[i].rewarded = 1u8;
                 return Ok(());
             }
         }
@@ -43,7 +43,7 @@ impl Repo {
         let _key = key.to_bytes();
         for i in 0..self.len as usize {
             if self.dependencies[i].key == _key {
-                return self.dependencies[i].rewarded == 1;
+                return self.dependencies[i].rewarded > 0;
             }
         }
         false

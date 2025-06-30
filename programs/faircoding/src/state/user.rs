@@ -11,5 +11,6 @@ pub struct User {
     #[max_len(32)]
     pub github_id: String,
     pub spending_limit: u64,
-    pub total_spent: u64,
+    pub month_total_spent: u64,
+    pub pending_reward: u64,
 }

@@ -20,7 +20,7 @@ pub struct CreateRepoToken<'info> {
         space = 8 + Repo::INIT_SPACE, */
         seeds = [b"repo", owner.key().as_ref(), repo_id.as_ref(), version.as_ref()],
         bump)]
-    pub repo: AccountLoader<'info, Repo>,
+    pub repo_data: AccountLoader<'info, Repo>,
     #[account(
         init,
         payer = payer,
@@ -30,15 +30,15 @@ pub struct CreateRepoToken<'info> {
         seeds = [b"mint", owner.key().as_ref(), repo_id.as_ref(), version.as_ref()],
         bump
     )]
-    pub mint: InterfaceAccount<'info, Mint>,
+    pub mint_account: InterfaceAccount<'info, Mint>,
     #[account(
         init,
         payer = payer,
-        associated_token::mint = mint,
+        associated_token::mint = mint_account,
         associated_token::authority = owner,
         associated_token::token_program = token_program,
     )]
-    pub token: InterfaceAccount<'info, TokenAccount>,
+    pub token_account: InterfaceAccount<'info, TokenAccount>,
     pub token_program: Interface<'info, TokenInterface>,
     pub system_program: Program<'info, System>,
     pub associated_token_program: Program<'info, AssociatedToken>,

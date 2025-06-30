@@ -6,6 +6,8 @@ pub enum FairCodingError {
     AllocationError,
     #[msg("Failed to reward repo")]
     RewardError,
+    #[msg("Nothing to withdraw from the user vault")]
+    NothingToWithdraw,
 }
 #[error_code]
 pub enum ErrorCode {
