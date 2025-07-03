@@ -1,0 +1,39 @@
+[package]
+name = "faircoding-api"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+resolver = "3"
+exclude = ["anchor"]
+members = ["anchor/programs/*"]
+
+[dependencies]
+tokio = { version = "1", features = ["macros"] }
+serde_json = { version = "1", features = ["raw_value"] }
+# Documentation: https://docs.rs/vercel_runtime/latest/vercel_runtime
+vercel_runtime = { version = "1" }
+anchor-client = "0.31.1"
+faircoding = { path = "anchor/programs/faircoding" }
+
+# You can specify a library for shared logic here (optional)
+[lib]
+path = "lib/lib.rs"
+
+# Each handler has to be specified as [[bin]]
+[[bin]]
+name = "push"
+path = "api/[user-id]/[repo-id]/push.rs"
+
+[[bin]]
+name = "create-user"
+path = "api/account/create-user.rs"
+
+# Note that you need to provide unique names for each binary:
+# [[bin]]
+# name = "user-id"
+# path = "api/user/[id].rs"
+#
+# [[bin]]
+# name = "group-id"
+# path = "api/group/[id].rs"

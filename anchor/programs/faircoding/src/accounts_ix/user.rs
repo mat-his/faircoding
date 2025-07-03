@@ -3,6 +3,7 @@ use anchor_lang::prelude::*;
 use crate::state::User;
 
 #[derive(Accounts)]
+#[instruction(github_id: String)]
 pub struct CreateUserAccount<'info> {
     #[account(mut)]
     pub owner: Signer<'info>,
@@ -12,7 +13,7 @@ pub struct CreateUserAccount<'info> {
         init,
         payer = payer,
         space = 8 + User::INIT_SPACE,
-        seeds = [b"user", owner.key().as_ref()],
+        seeds = [b"user", github_id.as_bytes(), owner.key().as_ref()],
         bump)]
     pub user: Account<'info, User>,
     pub system_program: Program<'info, System>,
