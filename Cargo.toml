@@ -15,6 +15,8 @@ serde_json = { version = "1", features = ["raw_value"] }
 vercel_runtime = { version = "1" }
 anchor-client = "0.31.1"
 faircoding = { path = "anchor/programs/faircoding" }
+xkcd2347-rust = { path = "../xkcd2347-rust/" }
+thiserror = "2.0.12"
 
 # You can specify a library for shared logic here (optional)
 [lib]
@@ -22,8 +24,8 @@ path = "lib/lib.rs"
 
 # Each handler has to be specified as [[bin]]
 [[bin]]
-name = "push"
-path = "api/[user-id]/[repo-id]/push.rs"
+name = "events"
+path = "api/events.rs"
 
 [[bin]]
 name = "create-user"
